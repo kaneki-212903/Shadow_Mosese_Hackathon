@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/dashboard';
-import EditProfile from './pages/editprofile';
 
 // MUI Theme imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import CreateProfile from './pages/createprofile';
+import PostCreationForm from './pages/post_form';
 
 // Create a dark theme
 const darkTheme = createTheme({
@@ -21,7 +22,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/pages/dashboard" element={<Dashboard />} />
-          <Route path="/pages/editprofile" element={<EditProfile />} />
+          <Route path="/pages/createprofile" element={<CreateProfile />} />
+          <Route path='/pages/post_form' element={<PostCreationForm />}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

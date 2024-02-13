@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import {  Box,
-    TextField,
-    Button,
-    Typography,
-    Radio,
-    RadioGroup,
-    FormControlLabel,
-    FormControl,
-    FormLabel,
-    InputAdornment,
-    IconButton,
-    Card,
-    CardContent,
-    Grid,
-    CardActions, ThemeProvider } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+  InputAdornment,
+  IconButton,
+  Card,
+  CardContent,
+  Grid,
+  CardActions,
+  ThemeProvider,
+} from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
@@ -27,46 +30,44 @@ const darkTheme = createTheme({
   },
 });
 
+const CreateProfile = () => {
+  const [newUserProfile, setNewUserProfile] = useState({
+    username: '',
+    firstName: '',
+    lastName: '',
+    age: '',
+    userDescription: '',
+    userType: '', // Student or Alumni
+    yearOfPassing: '',
+    currentYear: '',
+    branch: '',
+    fieldsOfInterest: '',
+    proficiency: '',
+    currentField: '',
+    workExperience: '',
+    currentEmployment: '',
+    linkedinProfile: '',
+  });
 
-const EditProfile = () => {
-    const [userProfile, setUserProfile] = useState({
-        username: '',
-        firstName: '',
-        lastName: '',
-        age: '',
-        userDescription: '',
-        userType: '', // Student or Alumni
-        yearOfPassing: '',
-        currentYear: '',
-        branch: '',
-        fieldsOfInterest: '',
-        proficiency: '',
-        currentField: '',
-        workExperience: '',
-        currentEmployment: '',
-        linkedinProfile: '',
-      });
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUserProfile((prevState) => ({
-          ...prevState,
-          [name]: value,
-        }));
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(userProfile);
-        // Handle the submission logic here
-      };
-    
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewUserProfile((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newUserProfile);
+    // Implement the profile creation logic here
+  };
   return (
     <ThemeProvider theme={darkTheme}>
       <Box sx={{ display: 'flex' }}>
-        <Navbar />
+        <Navbar isActive={false} />
         <Box sx={{ display: 'flex', width: '100%' }}>
-          <Sidebar />
+        <Sidebar isActive={false} />
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <Box
       component="form"
@@ -77,7 +78,7 @@ const EditProfile = () => {
       <Card raised sx={{ p: 3 }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>
-            Create Profile
+            Create New Profile
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -85,7 +86,7 @@ const EditProfile = () => {
                 fullWidth
                 label="Username"
                 name="username"
-                value={userProfile.username}
+                value={newUserProfile.username}
                 onChange={handleChange}
               />
             </Grid>
@@ -94,7 +95,7 @@ const EditProfile = () => {
                 fullWidth
                 label="First Name"
                 name="firstName"
-                value={userProfile.firstName}
+                value={newUserProfile.firstName}
                 onChange={handleChange}
               />
             </Grid>
@@ -103,7 +104,7 @@ const EditProfile = () => {
                 fullWidth
                 label="Last Name"
                 name="lastName"
-                value={userProfile.lastName}
+                value={newUserProfile.lastName}
                 onChange={handleChange}
               />
             </Grid>
@@ -113,7 +114,7 @@ const EditProfile = () => {
                 label="Age"
                 name="age"
                 type="number"
-                value={userProfile.age}
+                value={newUserProfile.age}
                 onChange={handleChange}
               />
             </Grid>
@@ -124,7 +125,7 @@ const EditProfile = () => {
                 name="userDescription"
                 multiline
                 rows={4}
-                value={userProfile.userDescription}
+                value={newUserProfile.userDescription}
                 onChange={handleChange}
               />
             </Grid>
@@ -134,7 +135,7 @@ const EditProfile = () => {
                 <RadioGroup
                   row
                   name="userType"
-                  value={userProfile.userType}
+                  value={newUserProfile.userType}
                   onChange={handleChange}
                 >
                   <FormControlLabel
@@ -151,17 +152,17 @@ const EditProfile = () => {
               </FormControl>
             </Grid>
             {/* Conditional Fields */}
-            {userProfile.userType && (
+            {newUserProfile.userType && (
               <Grid item xs={12}>
                 <Card variant="outlined" sx={{ p: 2 }}>
-                  {userProfile.userType === 'Student' ? (
+                  {newUserProfile.userType === 'Student' ? (
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6}>
                         <TextField
                           fullWidth
                           label="Year of Passing"
                           name="yearOfPassing"
-                          value={userProfile.yearOfPassing}
+                          value={newUserProfile.yearOfPassing}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -170,7 +171,7 @@ const EditProfile = () => {
                           fullWidth
                           label="Current Year"
                           name="currentYear"
-                          value={userProfile.currentYear}
+                          value={newUserProfile.currentYear}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -179,7 +180,7 @@ const EditProfile = () => {
                           fullWidth
                           label="Branch"
                           name="branch"
-                          value={userProfile.branch}
+                          value={newUserProfile.branch}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -190,7 +191,7 @@ const EditProfile = () => {
                           name="fieldsOfInterest"
                           multiline
                           rows={3}
-                          value={userProfile.fieldsOfInterest}
+                          value={newUserProfile.fieldsOfInterest}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -201,7 +202,7 @@ const EditProfile = () => {
                           name="proficiency"
                           multiline
                           rows={3}
-                          value={userProfile.proficiency}
+                          value={newUserProfile.proficiency}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -213,7 +214,7 @@ const EditProfile = () => {
                           fullWidth
                           label="Year of Passing"
                           name="yearOfPassing"
-                          value={userProfile.yearOfPassing}
+                          value={newUserProfile.yearOfPassing}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -222,7 +223,7 @@ const EditProfile = () => {
                           fullWidth
                           label="Branch"
                           name="branch"
-                          value={userProfile.branch}
+                          value={newUserProfile.branch}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -231,7 +232,7 @@ const EditProfile = () => {
                           fullWidth
                           label="Current Field"
                           name="currentField"
-                          value={userProfile.currentField}
+                          value={newUserProfile.currentField}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -242,7 +243,7 @@ const EditProfile = () => {
                           name="workExperience"
                           multiline
                           rows={3}
-                          value={userProfile.workExperience}
+                          value={newUserProfile.workExperience}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -251,7 +252,7 @@ const EditProfile = () => {
                           fullWidth
                           label="Currently Employed At/Working On"
                           name="currentEmployment"
-                          value={userProfile.currentEmployment}
+                          value={newUserProfile.currentEmployment}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -282,13 +283,13 @@ const EditProfile = () => {
                 fullWidth
                 label="LinkedIn Profile"
                 name="linkedinProfile"
-                value={userProfile.linkedinProfile}
+                value={newUserProfile.linkedinProfile}
                 onChange={handleChange}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton
-                        href={userProfile.linkedinProfile}
+                        href={newUserProfile.linkedinProfile}
                         target="_blank"
                       >
                         <LinkedInIcon />
@@ -302,7 +303,7 @@ const EditProfile = () => {
         </CardContent>
         <CardActions>
           <Button type="submit" variant="contained" color="primary" sx={{ width: '100%' }}>
-            Submit
+            Create Profile
           </Button>
         </CardActions>
       </Card>
@@ -314,4 +315,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default CreateProfile;

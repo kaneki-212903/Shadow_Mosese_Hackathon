@@ -1,12 +1,71 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Button, InputBase, Box } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Button, InputBase, Box, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function Navbar() {
+function Navbar({ isActive = true }) {
+  if (!isActive) {
+    // If the navbar should be completely inaccessible, you can return null or an empty fragment
+    // return null;
+    // Or, return a visually different navbar, e.g., with dimmed colors and disabled buttons
+    return (
+      <AppBar position="fixed">
+        <Toolbar sx={{ justifyContent: 'space-between', opacity: 0.5 }}> {/* Dimmed look */}
+          <Typography variant="h6" noWrap component="div">
+            Application Name
+          </Typography>
+          <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', maxWidth: '30%' }}>
+            {/* Input disabled */}
+            <InputBase
+              sx={{ ml: 1, flex: 1, width: '100%' }}
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              disabled
+            />
+            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" disabled>
+              <SearchIcon />
+            </IconButton>
+          </Box>
+          <Box>
+            {/* Buttons disabled */}
+            <Tooltip title="Home" disableFocusListener disableTouchListener>
+              <span>
+                <IconButton color="inherit" disabled>
+                  <HomeIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip title="Settings" disableFocusListener disableTouchListener>
+              <span>
+                <IconButton color="inherit" disabled>
+                  <SettingsIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip title="Notifications" disableFocusListener disableTouchListener>
+              <span>
+                <IconButton color="inherit" disabled>
+                  <NotificationsIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip title="Logout" disableFocusListener disableTouchListener>
+              <span>
+                <IconButton color="inherit" disabled>
+                  <LogoutIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    );
+  }
+
+  // Normal navbar rendering for active state
   return (
     <AppBar position="fixed">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
