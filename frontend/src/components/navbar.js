@@ -5,8 +5,21 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function Navbar({ isActive = true }) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+  
+    // Perform logout actions, such as clearing user info or tokens
+    localStorage.removeItem('token'); // Assuming you store a token in localStorage
+  
+    // Redirect to the login page
+    navigate('/pages/login');
+  };
+  
   if (!isActive) {
     // If the navbar should be completely inaccessible, you can return null or an empty fragment
     // return null;
@@ -92,7 +105,7 @@ function Navbar({ isActive = true }) {
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
         </Box>
